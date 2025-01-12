@@ -35,3 +35,12 @@ Data source: [Kaggle Amazon Sales Dataset](https://www.kaggle.com/datasets/karka
 - Sales peaked in certain categories during discount seasons.
 - Electronics had the highest revenue but required significant discounts.
 - High-rated products often had moderate discounts.
+
+## Outputs
+The following outputs were generated as part of the analysis:
+
+1. **[Top-Selling Products](outputs/top_selling_products.csv)** - A list of the top 10 products based on total sales.
+2. **[Category Sales Contribution](outputs/category_sales_contribution.csv)** - Sales contribution of each category as a percentage of total revenue.
+3. **[Ratings and Discounts Correlation](outputs/ratings_discounts_correlation.csv)** - A dataset exploring the relationship between ratings and discounts.
+
+All outputs are saved in the `outputs/` folder.
