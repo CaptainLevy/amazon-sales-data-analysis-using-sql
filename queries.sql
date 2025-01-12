@@ -5,10 +5,11 @@ DROP COLUMN about_product,
 DROP COLUMN user_id,
 DROP COLUMN user_name,
 DROP COLUMN review_id,
-DROP COLUMN review_title,
+DROP COLUMN review_title, 
 DROP COLUMN review_content,
 DROP COLUMN img_link,
 DROP COLUMN product_link;
+
 
 -- Product Analysis
 
