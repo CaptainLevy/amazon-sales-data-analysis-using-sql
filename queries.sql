@@ -1,6 +1,6 @@
 -- Data Cleaning
 ALTER TABLE amazon_sales_data 
-DROP COLUMN product_name,
+DROP COLUMN product_id,
 DROP COLUMN about_product,
 DROP COLUMN user_id,
 DROP COLUMN user_name,
@@ -13,50 +13,50 @@ DROP COLUMN product_link;
 -- Product Analysis
 
 -- Total Number of Products
-SELECT COUNT(DISTINCT product_id) AS total_products
+SELECT COUNT(DISTINCT product_name) AS total_products
 FROM amazon_sales_data;
 
 -- Top-Selling Products
-SELECT product_id, SUM(discounted_price) AS total_sales
+SELECT product_name, SUM(discounted_price) AS total_sales
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY total_sales DESC
 LIMIT 10;
 
 -- Least Selling Products
-SELECT product_id, SUM(discounted_price) AS total_sales
+SELECT product_name, SUM(discounted_price) AS total_sales
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY total_sales ASC
 LIMIT 10;
 
 -- Top 10 Products with Highest Ratings
-SELECT product_id, rating 
+SELECT product_name, rating 
 FROM amazon_sales_data
 ORDER BY rating DESC
 LIMIT 10;
 
 -- Products with Lowest Ratings
-SELECT product_id, rating
+SELECT product_name, rating
 FROM amazon_sales_data
 ORDER BY rating ASC
 LIMIT 10;
 
 -- Top 5 Products with Highest Discounts
-SELECT product_id, discount_percentage
+SELECT product_name, discount_percentage
 FROM amazon_sales_data
 ORDER BY discount_percentage DESC
 LIMIT 5;
 
 -- Products with No Discounts
-SELECT product_id, discounted_price, actual_price
+SELECT product_name, discounted_price, actual_price
 FROM amazon_sales_data
 WHERE discount_percentage = 0;
 
 -- Products with Sales Above Average and Rating Above 4
-SELECT product_id, SUM(discounted_price) AS total_sales, AVG(rating) AS average_rating
+SELECT product_name, SUM(discounted_price) AS total_sales, AVG(rating) AS average_rating
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 HAVING total_sales > (SELECT AVG(discounted_price) FROM amazon_sales_data) AND average_rating > 4;
 
 -- Sales Analysis
@@ -96,21 +96,21 @@ LIMIT 3;
 -- Review Analysis
 
 -- Number of Reviews per Product
-SELECT product_id, COUNT(rating) AS review_count
+SELECT product_name, COUNT(rating) AS review_count
 FROM amazon_sales_data
-GROUP BY product_id;
+GROUP BY product_name;
 
 -- Products with Most Reviews
-SELECT product_id, COUNT(rating) AS review_count
+SELECT product_name, COUNT(rating) AS review_count
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY review_count DESC
 LIMIT 10;
 
 -- Products with Least Reviews
-SELECT product_id, COUNT(rating) AS review_count
+SELECT product_name, COUNT(rating) AS review_count
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY review_count ASC
 LIMIT 10;
 
@@ -120,23 +120,23 @@ FROM amazon_sales_data
 GROUP BY category;
 
 -- Products with Highest Average Rating
-SELECT product_id, AVG(rating) AS average_rating
+SELECT product_name, AVG(rating) AS average_rating
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY average_rating DESC
 LIMIT 10;
 
 -- Products with Lowest Average Rating
-SELECT product_id, AVG(rating) AS average_rating
+SELECT product_name, AVG(rating) AS average_rating
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY average_rating ASC
 LIMIT 10;
 
 -- Products with the Most Consistent Ratings (Lowest Standard Deviation)
-SELECT product_id, STDDEV(rating) AS rating_stddev
+SELECT product_name, STDDEV(rating) AS rating_stddev
 FROM amazon_sales_data
-GROUP BY product_id
+GROUP BY product_name
 ORDER BY rating_stddev ASC
 LIMIT 10;
 
